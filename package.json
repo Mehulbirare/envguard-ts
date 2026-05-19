@@ -1,0 +1,79 @@
+{
+  "name": "envx",
+  "version": "1.0.0",
+  "description": "Zero-dependency TypeScript environment variable validator with compile-time type inference",
+  "keywords": [
+    "env",
+    "environment",
+    "validation",
+    "typescript",
+    "zod",
+    "dotenv",
+    "config",
+    "schema",
+    "type-safe"
+  ],
+  "author": "envx contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/Mehulbirare/npm-install-envx#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mehulbirare/npm-install-envx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mehulbirare/npm-install-envx/issues"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "bin": {
+    "envx": "./bin/envx.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test:coverage",
+    "size": "npx bundlesize"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.4",
+    "typescript": "^5.5.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "sideEffects": false,
+  "bundlesize": [
+    {
+      "path": "./dist/esm/index.js",
+      "maxSize": "3 kB"
+    }
+  ]
+}
