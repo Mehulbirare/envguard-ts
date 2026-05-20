@@ -1,18 +1,18 @@
-# envx
+# envguard
 
-[![npm version](https://img.shields.io/npm/v/envx?color=brightgreen)](https://www.npmjs.com/package/envx)
-[![npm downloads](https://img.shields.io/npm/dw/envx)](https://www.npmjs.com/package/envx)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/envx?label=minzip)](https://bundlephobia.com/package/envx)
+[![npm version](https://img.shields.io/npm/v/envguard?color=brightgreen)](https://www.npmjs.com/package/envguard)
+[![npm downloads](https://img.shields.io/npm/dw/envguard)](https://www.npmjs.com/package/envguard)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/envguard?label=minzip)](https://bundlephobia.com/package/envguard)
 [![CI](https://github.com/Mehulbirare/npm-install-envx/actions/workflows/ci.yml/badge.svg)](https://github.com/Mehulbirare/npm-install-envx/actions)
 [![coverage](https://codecov.io/gh/Mehulbirare/npm-install-envx/branch/main/graph/badge.svg)](https://codecov.io/gh/Mehulbirare/npm-install-envx)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
-[![license](https://img.shields.io/npm/l/envx)](LICENSE)
+[![license](https://img.shields.io/npm/l/envguard)](LICENSE)
 
 **Zero-dependency** TypeScript environment variable validator with compile-time type inference.  
 Validates on startup, throws human-readable errors, infers types — no `string` widening anywhere.
 
 ```ts
-import { createEnv, str, num, bool, url, port } from 'envx'
+import { createEnv, str, num, bool, url, port } from 'envguard'
 
 export const env = createEnv({
   schema: {
@@ -43,7 +43,7 @@ If any required variable is missing or fails validation, `createEnv` throws a **
 
 ## Table of contents
 
-- [Why envx?](#why-envx)
+- [Why envguard?](#why-envguard)
 - [Install](#install)
 - [Quick start](#quick-start)
 - [API reference](#api-reference)
@@ -59,16 +59,16 @@ If any required variable is missing or fails validation, `createEnv` throws a **
 
 ---
 
-## Why envx?
+## Why envguard?
 
-| Feature | envx | envalid | envsafe | t3-env |
+| Feature | envguard | envalid | envsafe | t3-env |
 |---|:---:|:---:|:---:|:---:|
 | Zero dependencies | ✅ | ❌ (dotenv) | ✅ | ❌ (zod) |
 | TypeScript-first types | ✅ | ⚠️ | ✅ | ✅ |
 | Compile-time inference | ✅ | ❌ | ✅ | ✅ |
 | Bundle size | **< 3 KB** | ~15 KB | ~4 KB | ~12 KB |
 | Works in Edge / Deno / Bun | ✅ | ❌ | ⚠️ | ⚠️ |
-| CLI (`npx envx check`) | ✅ | ❌ | ❌ | ❌ |
+| CLI (`npx envguard check`) | ✅ | ❌ | ❌ | ❌ |
 | Auto `.env.example` gen | ✅ | ❌ | ❌ | ❌ |
 | Secret masking | ✅ | ❌ | ❌ | ❌ |
 | `choices` enum narrowing | ✅ | ✅ | ✅ | ✅ |
@@ -78,11 +78,11 @@ If any required variable is missing or fails validation, `createEnv` throws a **
 ## Install
 
 ```bash
-npm install envx
+npm install envguard
 # or
-pnpm add envx
+pnpm add envguard
 # or
-yarn add envx
+yarn add envguard
 ```
 
 No peer dependencies required. Works with Node ≥ 18, Deno, Bun, and all Edge runtimes.
@@ -95,7 +95,7 @@ No peer dependencies required. Works with Node ≥ 18, Deno, Bun, and all Edge r
 
 ```ts
 // src/env.ts
-import { createEnv, str, num, bool, url, port, email } from 'envx'
+import { createEnv, str, num, bool, url, port, email } from 'envguard'
 
 export const env = createEnv({
   schema: {
@@ -124,7 +124,7 @@ app.listen(env.PORT)
 ### 3. Validate before deploy
 
 ```bash
-npx envx check --env .env.production --schema src/env.js
+npx envguard check --env .env.production --schema src/env.js
 ```
 
 ---
@@ -254,14 +254,14 @@ enums(['debug', 'info', 'warn', 'error'] as const)
 Generates the text of a `.env.example` file from a schema. Secrets are shown as `[secret]`.
 
 ```ts
-import { generateExample } from 'envx'
+import { generateExample } from 'envguard'
 import { schema } from './env'
 import fs from 'node:fs'
 
 fs.writeFileSync('.env.example', generateExample(schema))
 ```
 
-Or use the CLI: `npx envx generate`
+Or use the CLI: `npx envguard generate`
 
 ---
 
@@ -299,19 +299,19 @@ interface FieldError {
 
 ```bash
 # Validate a .env file against a schema
-npx envx check
-npx envx check --env .env.production --schema dist/env.js
+npx envguard check
+npx envguard check --env .env.production --schema dist/env.js
 
 # Generate .env.example from a schema
-npx envx generate
-npx envx generate --schema dist/env.js --out .env.example
+npx envguard generate
+npx envguard generate --schema dist/env.js --out .env.example
 ```
 
 The schema file must export the schema object as `default`, `schema`, or the module itself:
 
 ```js
-// envx.schema.js  (default location)
-const { str, url, port } = require('envx')
+// envguard.schema.js  (default location)
+const { str, url, port } = require('envguard')
 module.exports = {
   DATABASE_URL: url(),
   PORT: port({ default: 3000 }),
@@ -335,15 +335,15 @@ Exit codes: `0` = valid, `1` = invalid or error.
 
 ### vs `envalid`
 
-envalid is battle-tested but has a dotenv peer dependency, a larger bundle (~15 KB), no TypeScript-first design, and no CLI tooling. envx is zero-dep and infers precise types at compile time.
+envalid is battle-tested but has a dotenv peer dependency, a larger bundle (~15 KB), no TypeScript-first design, and no CLI tooling. envguard is zero-dep and infers precise types at compile time.
 
 ### vs `envsafe`
 
-envsafe is TS-first and has good inference but is no longer actively maintained. envx adds the CLI, secret masking, and `.env.example` generation.
+envsafe is TS-first and has good inference but is no longer actively maintained. envguard adds the CLI, secret masking, and `.env.example` generation.
 
 ### vs `t3-env`
 
-t3-env wraps Zod which is powerful but adds ~12 KB to your bundle and requires Zod as a peer. envx is zero-dependency and covers 95% of real-world use cases in < 3 KB. If you already use Zod heavily, t3-env might be a better fit; otherwise envx is the lighter choice.
+t3-env wraps Zod which is powerful but adds ~12 KB to your bundle and requires Zod as a peer. envguard is zero-dependency and covers 95% of real-world use cases in < 3 KB. If you already use Zod heavily, t3-env might be a better fit; otherwise envguard is the lighter choice.
 
 ---
 
@@ -360,4 +360,4 @@ Please ensure `npm run test:coverage` passes at ≥ 90% coverage before opening 
 
 ## License
 
-MIT © envx contributors
+MIT © envguard contributors

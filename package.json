@@ -1,6 +1,6 @@
 {
-  "name": "envx",
-  "version": "1.0.1",
+  "name": "envguard",
+  "version": "1.0.0",
   "description": "Zero-dependency TypeScript environment variable validator with compile-time type inference",
   "keywords": [
     "env",
@@ -39,7 +39,7 @@
     }
   },
   "bin": {
-    "envx": "./bin/envx.js"
+    "envguard": "./bin/envx.js"
   },
   "files": [
     "dist",

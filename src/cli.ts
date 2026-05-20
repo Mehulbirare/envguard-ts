@@ -80,7 +80,7 @@ async function loadSchema(schemaPath: string): Promise<Schema> {
 
 async function cmdCheck(args: Record<string, string | true>): Promise<void> {
   const envFile = typeof args['env'] === 'string' ? args['env'] : '.env'
-  const schemaFile = typeof args['schema'] === 'string' ? args['schema'] : 'envx.schema.js'
+  const schemaFile = typeof args['schema'] === 'string' ? args['schema'] : 'envguard.schema.js'
 
   const envPath = path.resolve(process.cwd(), envFile)
   if (!fs.existsSync(envPath)) {
@@ -108,7 +108,7 @@ async function cmdCheck(args: Record<string, string | true>): Promise<void> {
 }
 
 async function cmdGenerate(args: Record<string, string | true>): Promise<void> {
-  const schemaFile = typeof args['schema'] === 'string' ? args['schema'] : 'envx.schema.js'
+  const schemaFile = typeof args['schema'] === 'string' ? args['schema'] : 'envguard.schema.js'
   const outFile = typeof args['out'] === 'string' ? args['out'] : '.env.example'
 
   const schema = await loadSchema(schemaFile)
