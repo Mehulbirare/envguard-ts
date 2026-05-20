@@ -1,6 +1,6 @@
 {
   "name": "envx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency TypeScript environment variable validator with compile-time type inference",
   "keywords": [
     "env",
