@@ -62,7 +62,15 @@ function parseArgs(argv: string[]): Record<string, string | true> {
 // ---------------------------------------------------------------------------
 
 async function loadSchema(schemaPath: string): Promise<Schema> {
-  const resolved = path.resolve(process.cwd(), schemaPath)
+  const cwd = process.cwd()
+  const resolved = path.resolve(cwd, schemaPath)
+
+  // Security: prevent path traversal outside cwd
+  if (!resolved.startsWith(cwd + path.sep) && resolved !== cwd) {
+    console.error(`[envx] schema path must be within the current working directory`)
+    process.exit(1)
+  }
+
   if (!fs.existsSync(resolved)) {
     console.error(`[envx] schema file not found: ${resolved}`)
     process.exit(1)

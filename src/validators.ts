@@ -252,9 +252,8 @@ export function port(opts: PortOptions = {}): ValidatorSpec<number> {
 /** Options for {@link email}. */
 export type EmailOptions = BaseOptions<string>
 
-// RFC-5321-compatible simplified regex — fast and covers 99%+ real addresses
-const EMAIL_RE =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/
+// ReDoS-safe email check: cap input length first, then use a simple regex
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 /**
  * Validates an email address environment variable.
@@ -269,7 +268,7 @@ export function email(opts?: EmailOptions): ValidatorSpec<string>
 export function email(opts: EmailOptions = {}): ValidatorSpec<string> {
   return makeSpec<string>(
     (raw, field) => {
-      if (!EMAIL_RE.test(raw)) {
+      if (raw.length > 254 || !EMAIL_RE.test(raw)) {
         throw new Error(`must be a valid email address for ${field}`)
       }
       return raw
