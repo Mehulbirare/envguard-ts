@@ -1,5 +1,5 @@
 {
-  "name": "envguard",
+  "name": "envguard-ts",
   "version": "1.0.0",
   "description": "Zero-dependency TypeScript environment variable validator with compile-time type inference",
   "keywords": [
@@ -13,15 +13,15 @@
     "schema",
     "type-safe"
   ],
-  "author": "envx contributors",
+  "author": "Mehulbirare",
   "license": "MIT",
-  "homepage": "https://github.com/Mehulbirare/npm-install-envx#readme",
+  "homepage": "https://github.com/Mehulbirare/envguard-ts#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mehulbirare/npm-install-envx.git"
+    "url": "https://github.com/Mehulbirare/envguard-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/Mehulbirare/npm-install-envx/issues"
+    "url": "https://github.com/Mehulbirare/envguard-ts/issues"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -39,7 +39,7 @@
     }
   },
   "bin": {
-    "envguard": "./bin/envx.js"
+    "envx": "./bin/envx.js"
   },
   "files": [
     "dist",

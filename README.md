@@ -12,7 +12,7 @@
 Validates on startup, throws human-readable errors, infers types — no `string` widening anywhere.
 
 ```ts
-import { createEnv, str, num, bool, url, port } from 'envguard'
+import { createEnv, str, num, bool, url, port } from 'envguard-ts'
 
 export const env = createEnv({
   schema: {
@@ -78,11 +78,11 @@ If any required variable is missing or fails validation, `createEnv` throws a **
 ## Install
 
 ```bash
-npm install envguard
+npm install envguard-ts
 # or
-pnpm add envguard
+pnpm add envguard-ts
 # or
-yarn add envguard
+yarn add envguard-ts
 ```
 
 No peer dependencies required. Works with Node ≥ 18, Deno, Bun, and all Edge runtimes.
@@ -95,7 +95,7 @@ No peer dependencies required. Works with Node ≥ 18, Deno, Bun, and all Edge r
 
 ```ts
 // src/env.ts
-import { createEnv, str, num, bool, url, port, email } from 'envguard'
+import { createEnv, str, num, bool, url, port, email } from 'envguard-ts'
 
 export const env = createEnv({
   schema: {
@@ -310,8 +310,8 @@ npx envguard generate --schema dist/env.js --out .env.example
 The schema file must export the schema object as `default`, `schema`, or the module itself:
 
 ```js
-// envguard.schema.js  (default location)
-const { str, url, port } = require('envguard')
+// envguard-ts.schema.js  (default location)
+const { str, url, port } = require('envguard-ts')
 module.exports = {
   DATABASE_URL: url(),
   PORT: port({ default: 3000 }),
